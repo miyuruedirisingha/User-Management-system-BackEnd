@@ -1,15 +1,16 @@
+require('dotenv').config();
 const express = require('express');
 const app = express();
 const cors = require('cors');
-const port = 3001;
-const host = '127.0.0.1';
+const port = process.env.PORT || 3001;
+const host = process.env.HOST || '127.0.0.1';
 const mongoose = require('mongoose');
 const router = require('./router');
 
 app.use(cors());
 app.use(express.json());
 
-const uri = "mongodb+srv://miyuru_db:ashaN2001%40@cluster0.mdso97r.mongodb.net/?retryWrites=true&w=majority";
+const uri = process.env.MONGODB_URI;
 
 const connect = async () => {
   try {
