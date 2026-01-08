@@ -16,20 +16,25 @@ const getUsers = (req,res,next) => {
     });
 };
 
-    const adddUser = (req,res,next) => {
+    const addUser = (req,res,next) => {
+    console.log('Request body:', req.body);
     const user = new users({
             id: req.body.id,
             name: req.body.name,
         });
         user.save()
         .then(response => {
+            console.log('User saved:', response);
             res.json({
-                message: 'User added successfully!'
+                message: 'User added successfully!',
+                user: response
             })
         })
         .catch(error => {
+            console.log('Error saving user:', error);
             res.json({
-                message: 'An error occurred!'
+                message: 'An error occurred!',
+                error: error.message
             })
         });
     };
@@ -82,7 +87,7 @@ const getUsers = (req,res,next) => {
     };
 
 exports.getUsers = getUsers;
-exports.addUser = adddUser;
+exports.addUser = addUser;
 exports.updateUser = updateUser;
 exports.deleteUser = deleteUser;
 exports.getUserById = getUserById; 
